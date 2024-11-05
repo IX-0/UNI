@@ -32,8 +32,12 @@ static int invariant(Date *d) { return DateIsValid(d->year, d->month, d->day); }
 // or NULL if allocation fails.
 Date *DateCreate(int yy, int mm, int dd) {
     assert(DateIsValid(yy, mm, dd));
+    Date *d = (Date *)  malloc(sizeof(Date));
 
-    Date *d = (Date *)malloc(sizeof(Date))
+    d->day = dd;
+    d->month = mm;
+    d->year = yy;
+
     assert(invariant(d)); // check invariant
     return d;
 }
@@ -43,8 +47,9 @@ Date *DateCreate(int yy, int mm, int dd) {
 // Postcondition: *pd is set to NULL.
 void DateDestroy(Date **pd) {
     assert(*pd != NULL);
-
-    // EDIT ...
+    Date* d = *pd;
+    free(d);
+    *pd = NULL;
 }
 
 // table of month lengths in common and leap years
@@ -110,16 +115,29 @@ int DateParse(Date *d, const char *str, int FMT) {
 // Compare dates a and b.
 // Return an integer >0 if a>b, 0 if a==b and <0 if a<b.
 int DateCompare(const Date *a, const Date *b) {
-    // EDIT ...
-    return 0;
+    int yd = a->year - b->year;
+    int md = a->month - b->month;
+    int dd = a->day - a->day;
+    
+    return yd * 100000 + md * 100 + dd;
 }
 
 // Increment date.
 // Precondition: d must precede DateMAX.
 void DateIncr(Date *d) {
     assert(DateCompare(d, &DateMAX) < 0);
-
-    // EDIT ...
+    
+    if (d->day < DateDaysInMonth(d->year, d->month)) {
+        d->day++;
+    } else {
+        d->day = 1;
+        if (d->month < 12) {
+            d->month++;  
+        } else {
+            d->month = 1;
+            d->year++;
+        }
+    }
 
     assert(invariant(d)); // check invariant
 }
@@ -129,7 +147,17 @@ void DateIncr(Date *d) {
 void DateDecr(Date *d) {
     assert(DateCompare(d, &DateMIN) > 0);
 
-    // EDIT ...
-
+    if (d->day > 1) {
+        d->day--;
+    } else {
+        d->day = DateDaysInMonth(d->year, d->month - 1);
+        if (d->month > 1) {
+            d->month--;  
+        } else {
+            d->month = 12;
+            d->year--;
+        }
+    }
+        
     assert(invariant(d)); // check invariant
 }

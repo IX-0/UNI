@@ -17,14 +17,14 @@
 // BUT, if this internal representation is changed,
 // the clients code will have to be changed too.
 typedef struct {
-  int id;
-  Date birthDate;  // this is the actual struct, not a pointer!
-  char *firstName;
-  char *lastName;
+    int id;
+    Date birthDate; // this is the actual struct, not a pointer!
+    char *firstName;
+    char *lastName;
 } Person;
 
 Person *PersonCreate(const char *fname, const char *lname, int yy, int mm,
-                     int dd);
+        int dd);
 
 void PersonDestroy(Person **pd);
 
@@ -34,4 +34,4 @@ int PersonCompareByBirth(const Person *p1, const Person *p2);
 
 int PersonCompareByLastFirstName(const Person *p1, const Person *p2);
 
-#endif  // _PERSON_
+#endif // _PERSON_

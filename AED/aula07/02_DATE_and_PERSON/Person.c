@@ -8,6 +8,7 @@
 // so that they pass all tests.
 
 #include "Person.h"
+#include "Date.h"
 
 #include <assert.h>
 #include <stdio.h>
@@ -25,9 +26,21 @@ static int lastID = 0;
 // The names are copied to internally allocated memory.
 Person *PersonCreate(const char *fname, const char *lname, int yy, int mm,
                      int dd) {
-  // EDIT Person* p = ...
+    Person* p = (Person *)  malloc(sizeof(Person));
+    if (p == NULL) abort();
 
-  return NULL;
+    p->firstName = strdup(fname);
+    p->lastName = strdup(lname);
+    p->id = lastID++;
+
+    Date* d = (Date* )  malloc(sizeof(Date));
+    if (d == NULL) abort();
+
+    d = DateCreate(yy, mm, dd);
+    p->birthDate = *d;
+    DateDestroy(&d);
+
+    return p;
 }
 
 // Free the memory pointed to by *pp and by the names inside it,
@@ -35,32 +48,37 @@ Person *PersonCreate(const char *fname, const char *lname, int yy, int mm,
 // Precondition: *pp must not be NULL.
 // Postcondition: *pp is set to NULL.
 void PersonDestroy(Person **pp) {
-  assert(*pp != NULL);
-
-  // EDIT ...
+    assert(*pp != NULL);
+    Person* p = *pp;
+    free(p->lastName);
+    free(p->firstName);
+    free(p);
+    *pp = NULL;
 }
 
 // Prints a person formatted as "[id, lastname, firstname, birthdate]",
 // followed by a suffix string.
 void PersonPrintf(Person *p, const char *suffix) {
-  if (p == NULL)
-    printf("NULL%s", suffix);
-  else
-    printf("(%d, %s, %s, %s)%s", p->id, p->lastName, p->firstName,
-           DateFormat(&(p->birthDate), YMD), suffix);
+    if (p == NULL)
+        printf("NULL%s", suffix);
+    else
+        printf("(%d, %s, %s, %s)%s", p->id, p->lastName, p->firstName,
+               DateFormat(&(p->birthDate), YMD), suffix);
 }
 
 // Compare birth dates of two persons.
 // Return a negative/positive integer if p1 was born before/after p2.
 // Return zero if p1 and p2 were born on the same date.
 int PersonCompareByBirth(const Person *p1, const Person *p2) {
-  // EDIT ...
-  return 0;
+    const Date* d1 = &p1->birthDate;
+    const Date* d2 = &p2->birthDate;
+    return DateCompare(d1,d2);
 }
 
 // Compare two persons by last name, then first name (if last name is the same).
 // Return a -/+/0 integer if p1 precedes/succeeds/is equal to p2.
 int PersonCompareByLastFirstName(const Person *p1, const Person *p2) {
-  // EDIT ...
-  return 0;
+    const char* n1 = p1->firstName;
+    const char* n2 = p2->firstName;
+    return strcmp(n1, n2);
 }
