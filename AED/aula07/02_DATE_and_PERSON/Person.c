@@ -33,10 +33,7 @@ Person *PersonCreate(const char *fname, const char *lname, int yy, int mm,
     p->lastName = strdup(lname);
     p->id = lastID++;
 
-    Date* d = (Date* )  malloc(sizeof(Date));
-    if (d == NULL) abort();
-
-    d = DateCreate(yy, mm, dd);
+    Date* d = DateCreate(yy, mm, dd);
     p->birthDate = *d;
     DateDestroy(&d);
 

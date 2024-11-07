@@ -1,0 +1,7 @@
+Ta = 0.01;
+t = 0:Ta:10;
+x = 10 + 14*cos(20*pi*t - pi/3) ...
+    + 8*cos(40*pi*t + pi/2);
+
+[X, f] = espectro(x,);
+stem(f,X)

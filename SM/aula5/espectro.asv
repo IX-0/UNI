@@ -1,0 +1,6 @@
+function [X, f] = espectro(x, Ta)
+    N = lenght(x);
+    fa = 1/Ta;
+    T = 
+    fft(x)
+end
