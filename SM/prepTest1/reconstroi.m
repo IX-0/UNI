@@ -4,8 +4,8 @@ function [x, t] = reconstroi(ck, Np, Ta, f0)
     K = length(ck);
     x = 0;
     for k = 1:K
-        x = x + ck(k) ...
-            * exp(-2i * pi * f0 * (k - round(K/2)) * t);
+        x = x + ck(k) ... % k - round(K/2)) com negs
+            * exp(-2i * pi * f0 * k * t);
     end
     x = real(x);
 end
