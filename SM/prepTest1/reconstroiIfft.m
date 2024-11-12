@@ -1,6 +1,6 @@
 function [x,t] = reconstroiIfft(X,f)
     N = length(X);
-    x = ifft(ifftshift(X)); %*N;
+    x = ifft(ifftshift(X))* N;
  
     fa = max(f)*2;
     Ta = 1/fa;
