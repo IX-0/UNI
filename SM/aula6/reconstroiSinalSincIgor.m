@@ -1,4 +1,4 @@
-function ReconstroiSinal(x,Ta)
+function [y,t] = reconstroiSinalSincIgor(x,Ta)
     N = length(x);
     T_rec = Ta/100;
     t = 0:T_rec:Ta*(N-1);

@@ -9,7 +9,7 @@ num_class = length(unique_class);
 num_car = length(car);
 
 perm = randperm(size(X,1));
-percent = 0.7;
+percent = 0.3;
 num_treino = round(length(perm) * percent);
 
 %Alinea b)
