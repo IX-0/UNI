@@ -1,2 +1,7 @@
 RS/projeto
+
+#Ignore matlab's temporary files
+*.asv
+
+#Ignore this
 .gitignore
