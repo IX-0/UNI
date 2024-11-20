@@ -13,7 +13,6 @@
 //// SEARCH ... AND COMPLETE ////
 
 #include "SortedList.h"
-
 #include <assert.h>
 #include <stdlib.h>
 

@@ -10,18 +10,17 @@
 int main(int argc, char *argv[])
 {
     char text[1024];
-    
+    FILE* logp = fopen("command.log", "a");
+    if (logp == NULL) return EXIT_FAILURE;
+        
     do
     {
         printf("Command: ");
         scanf("%1023[^\n]%*c", text);
 
-        /* system(const char *command) executes a command specified in command
-            by calling /bin/sh -c command, and returns after the command has been
-            completed.
-        */
         if(strcmp(text, "end")) {
            printf("\n * Command to be executed: %s\n", text);
+           fprintf(logp,"> %s\n",text);
            printf("---------------------------------\n");
            system(text);
            printf("---------------------------------\n");

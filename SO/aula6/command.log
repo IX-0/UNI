@@ -1,0 +1,3 @@
+> echo 1
+> bin/myCat numbers.txt
+> cat numbers.txt | sort -n

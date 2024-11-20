@@ -22,11 +22,8 @@ void listDir(char dirname[])
     dent = readdir(dp);
     while(dent!=NULL) 
     {
-        if(dent->d_name[0] != '.') /* do not list hidden dirs/files */
-        {
-          printf("%s/%s\n",dirname,dent->d_name);
-        }
-
+        printf("%s/%s\n",dirname,dent->d_name);
+        
         dent = readdir(dp);
     }
 }

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <string.h>
 
 /* SUGESTÂO: utilize as páginas do manual para conhecer mais sobre as funções usadas:
  man fopen
@@ -33,22 +32,9 @@ int main(int argc, char *argv[])
     }
 
     /* Read all the lines of the file */
-    int c=1;
-    int lnum=1;
     while( fgets(line, sizeof(line), fp) != NULL )
     {
-        if (c) {
-            printf("%d │ ", lnum);
-        }
-        printf("%s", line);
-
-        if (line[strlen(line) - 1] != '\n') { 
-            c = 0;/* not needed to add '\n' to printf because fgets will read the '\n' that ends each line in the file */
-        } else {
-            c = 1;
-        }
-
-        lnum++;
+         printf("-> %s", line); /* not needed to add '\n' to printf because fgets will read the '\n' that ends each line in the file */
     }
 
     fclose(fp);

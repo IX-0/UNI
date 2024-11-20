@@ -84,7 +84,6 @@ int PersonCompareByBirth(const Person *p1, const Person *p2) {
 // Compare two persons by last name, then first name (if last name is the same).
 // Return a -/+/0 integer if p1 precedes/succeeds/is equal to p2.
 int PersonCompareByLastFirstName(const Person *p1, const Person *p2) {
-  // SOLUTION
   int cmp = strcmp(p1->lastName, p2->lastName);
   if (cmp != 0) return cmp;
   cmp = strcmp(p1->firstName, p2->firstName);
